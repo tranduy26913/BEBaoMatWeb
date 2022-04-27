@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser'
 import {UserRoute,AuthRoute, NovelRoute, CommentRoute} from './routers/index.js'
-import helmet from 'helmet'
+import * as helmet from "helmet";
 
 dotenv.config()
 
@@ -17,6 +17,7 @@ const URI=process.env.MONGODB_URL;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true,limit:'50mb'}))
 app.use(cors({ credentials: true, origin:"https://tranduy26913.github.io"}));//fix lỗi cross-domain
+//app.use(cors({ credentials: true, origin:true}));
 app.use(cookieParser());
 app.disable('x-powered-by');//fix lỗi leak info from x-powered-by
 app.use(helmet.frameguard())//fix lỗi clickjacking
@@ -24,8 +25,7 @@ app.use(helmet.noSniff());//fix lỗi X-Content-Type-Options Header Missing
 
 app.use(helmet.hsts()); // default configuration
 
-const csp = require('helmet-csp')
-app.use(csp({
+app.use(helmet.contentSecurityPolicy({
    directives: {
        defaultSrc: ["'self'"],  // default value for all directives that are absent
        scriptSrc: ["'self'"],   // helps prevent XSS attacks
