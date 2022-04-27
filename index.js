@@ -23,7 +23,6 @@ app.use(helmet.frameguard())//fix lỗi clickjacking
 app.use(helmet.noSniff());//fix lỗi X-Content-Type-Options Header Missing
 
 app.use(helmet.hsts()); // default configuration
-app.use(helmet.hsts("<max-age>", "<includeSubdomains>"));
 
 const csp = require('helmet-csp')
 app.use(csp({
