@@ -23,7 +23,12 @@ app.disable('x-powered-by');//fix lỗi leak info from x-powered-by
 app.use(helmet.frameguard())//fix lỗi clickjacking
 app.use(helmet.noSniff());//fix lỗi X-Content-Type-Options Header Missing
 
-app.use(helmet.hsts()); // default configuration
+app.use(
+    helmet.hsts({
+      maxAge: 84600,
+      preload: true,
+    })
+  );
 
 app.use(helmet.contentSecurityPolicy({
    directives: {
@@ -33,6 +38,13 @@ app.use(helmet.contentSecurityPolicy({
        styleSrc: ["'none'"]
     }
 }))
+
+app.use(
+    helmet.referrerPolicy({
+      policy: ["origin", "unsafe-url"],
+    })
+  );
+
 
 mongoose.connect(URI)
     .then(()=>{
