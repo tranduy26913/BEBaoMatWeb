@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true,limit:'50mb'}))
 app.use(cors({ credentials: true, origin:"https://tranduy26913.github.io"}));
 app.use(cookieParser());
+app.disable('x-powered-by');
 
 mongoose.connect(URI)
     .then(()=>{
