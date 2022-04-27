@@ -25,7 +25,7 @@ app.use(helmet.noSniff());//fix lỗi X-Content-Type-Options Header Missing
 
 app.use(
     helmet.hsts({
-      maxAge: 84600,
+      maxAge: 31000000,
       preload: true,
     })
   );
@@ -41,7 +41,7 @@ app.use(helmet.contentSecurityPolicy({
 
 app.use(
     helmet.referrerPolicy({
-      policy: ["origin", "unsafe-url"],
+      policy: ["no-referrer"],
     })
   );
 
