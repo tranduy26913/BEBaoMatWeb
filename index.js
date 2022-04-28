@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.disable('x-powered-by');//fix lỗi leak info from x-powered-by
 app.use(helmet.frameguard())//fix lỗi clickjacking
 app.use(helmet.noSniff());//fix lỗi X-Content-Type-Options Header Missing
-
+app.use(helmet.xssFilter());
 app.use(
     helmet.hsts({
       maxAge: 31000000,
@@ -35,7 +35,8 @@ app.use(helmet.contentSecurityPolicy({
        defaultSrc: ["'none'"],  // default value for all directives that are absent
        scriptSrc: ["'self'"],   // helps prevent XSS attacks
        frameAncestors: ["'none'"],  // helps prevent Clickjacking attacks
-       styleSrc: ["'none'"]
+       styleSrc: ["'none'"],
+       fontSrc:["'none'"]
     }
 }))
 
