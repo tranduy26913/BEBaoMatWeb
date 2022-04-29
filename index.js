@@ -16,7 +16,7 @@ const URI=process.env.MONGODB_URL;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true,limit:'50mb'}))
-app.use(cors({ credentials: true, origin:"https://tranduy26913.github.io"}));//fix lỗi cross-domain
+app.use(cors({ credentials: true, origin:"https://febaomatweb.vercel.app"}));//fix lỗi cross-domain
 //app.use(cors({ credentials: true, origin:true}));
 app.use(cookieParser());
 app.disable('x-powered-by');//fix lỗi leak info from x-powered-by
@@ -32,11 +32,13 @@ app.use(
 
 app.use(helmet.contentSecurityPolicy({
    directives: {
-       defaultSrc: ["'none'"],  // default value for all directives that are absent
-       scriptSrc: ["'self'"],   // helps prevent XSS attacks
+       defaultSrc: ["'self'"],  // default value for all directives that are absent
+       scriptSrc: ["'none'"],   // helps prevent XSS attacks
        frameAncestors: ["'none'"],  // helps prevent Clickjacking attacks
        styleSrc: ["'none'"],
-       fontSrc:["'none'"]
+       fontSrc:["'none'"],
+       formAction:["'none'"],
+       objectSrc:["'none'"]
     }
 }))
 
