@@ -9,15 +9,14 @@ import * as helmet from "helmet";
 
 dotenv.config()
 
-
 const app=express();
 const PORT = process.env.PORT ||5000;
 const URI=process.env.MONGODB_URL;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true,limit:'50mb'}))
-app.use(cors({ credentials: true, origin:"https://febaomatweb.vercel.app"}));//fix lỗi cross-domain
-//app.use(cors({ credentials: true, origin:true}));
+//app.use(cors({ credentials: true, origin:"https://febaomatweb.vercel.app"}));//fix lỗi cross-domain
+app.use(cors({ credentials: true, origin:true}));
 app.use(cookieParser());
 app.disable('x-powered-by');//fix lỗi leak info from x-powered-by
 app.use(helmet.frameguard())//fix lỗi clickjacking

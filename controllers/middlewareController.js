@@ -27,8 +27,7 @@ export const verifyTokenAdmin = (req, res, next) => {
             if(user.roles.includes("ADMIN")){
                 req.user = user
                 next();
-            }
-                
+            }   
             else
                 return req.status(403).json(ResponseDetail(403,{message:"Bạn không có quyền truy cập"}))
         })          

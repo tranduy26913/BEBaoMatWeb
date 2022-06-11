@@ -16,9 +16,9 @@ router.get('/novel/:url/mucluc', NovelController.GetChapterByUrl);
 
 router.get('/novel/:url/chuong/:chapNumber',NovelController.GetChapterByNumber)
 
-router.post('/novel/reading/',NovelController.SetReading)
+router.post('/novel/reading/', verifyToken, NovelController.SetReading)
 
-router.get('/readings',NovelController.GetReadings)
+router.get('/readings',verifyToken, NovelController.GetReadings)
 
 router.post('/novel/create',verifyToken,NovelController.CreateNovel)
 

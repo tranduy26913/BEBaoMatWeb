@@ -70,14 +70,26 @@ export const CommentController = {
     DeleteComment: async (req, res) => {
         try {
             const novelId = req.body.id
-            console.log(novelId)
-            const count=await Comment.findByIdAndDelete(novelId)
-            if(count) 
-                return res.status(200).json(ResponseData(200, {message:"Xoá thành công"}))
-            else {
+            const username = req.user.sub
+            const user = await User.findOne({username})
+            const comment = await Comment.findById(novelId)
+            if(comment){
+                if(comment.userId === user._id){
+                    const count=await Comment.findByIdAndDelete(novelId)
+                    if(count) 
+                        return res.status(200).json(ResponseData(200, {message:"Xoá thành công"}))
+                    else {
+                        return res.status(400).json(ResponseDetail(400, { message: 'Xoá thất bại' }))
+                    }
+                }
+                else{
+                    return res.status(403).json(ResponseDetail(403, { message: 'Không được phép xoá comment của người khác' }))
+                }
+            }
+            else{
                 return res.status(400).json(ResponseDetail(400, { message: 'Xoá thất bại' }))
             }
-
+            
         } catch (error) {
             console.log(error)
             return res.status(500).json(ResponseDetail(200, { message: "Lỗi xoá comment" }))
