@@ -21,6 +21,12 @@ const schema =new  mongoose.Schema({
     tenchap:{
         type: String,
         require: true,
+        validate:{
+            validator:item=>{
+                return item.length > 10
+            },
+            message:"Nội dung phải dài hơn 10 kí tự"
+        }
     },
     dautruyenId:{
         type: mongoose.Schema.Types.ObjectId,

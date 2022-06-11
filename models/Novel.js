@@ -6,6 +6,12 @@ const schema =new  mongoose.Schema({
     tentruyen:{
         type: String,
         require: true,
+        validate:{
+            validator:item=>{
+                return item.length > 10
+            },
+            message:"Nội dung phải dài hơn 10 kí tự"
+        }
     },
     tacgia:{
         type: String,
@@ -56,6 +62,7 @@ const schema =new  mongoose.Schema({
     },
     url:{
         type: String,
+        unique: true,
         require: true,
     },
     sochap:{

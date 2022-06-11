@@ -13,7 +13,13 @@ const schema = new mongoose.Schema({
     },
     content:{
         type:String,
-        required:true
+        required:true,
+        validate:{
+            validator:item=>{
+                return item.length > 10
+            },
+            message:"Nội dung phải dài hơn 10 kí tự"
+        }
     },
     
 },{timestamps:true})
