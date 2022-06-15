@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({extended:true,limit:'50mb'}))
 app.use(cors({ credentials: true, origin:true}));
 app.use(cookieParser());
 app.disable('x-powered-by');//fix lỗi leak info from x-powered-by
+app.use(helmet())
 app.use(helmet.frameguard())//fix lỗi clickjacking
 app.use(helmet.noSniff());//fix lỗi X-Content-Type-Options Header Missing
 app.use(helmet.xssFilter());

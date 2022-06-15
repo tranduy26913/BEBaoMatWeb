@@ -30,7 +30,7 @@ export const AuthController = {
             const roles = await Role.find({ name: "USER" });
             const salt = await bcrypt.genSalt(10);
             const hash = await bcrypt.hash(req.body.password, salt);
-            console.log(hash)
+            
             const newUser = await new User({
                 username: req.body.username,
                 password: hash,
