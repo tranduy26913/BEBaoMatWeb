@@ -20,6 +20,7 @@ const limiter = rateLimit({
   windowMs: 10 * 60 * 1000, 
   max: 50 
 });
+
 app.use(limiter)
 const loginLimiter = rateLimit({
   windowMs: 5 * 60 * 1000, 
