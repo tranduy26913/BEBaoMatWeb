@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser'
 import {UserRoute,AuthRoute, NovelRoute, CommentRoute} from './routers/index.js'
 import helmet from "helmet";
-
+import rateLimit from 'express-rate-limit'
 dotenv.config()
 
 const app=express();
