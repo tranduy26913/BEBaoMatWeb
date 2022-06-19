@@ -13,7 +13,7 @@ const app=express();
 const PORT = process.env.PORT ||5000;
 const URI=process.env.MONGODB_URL;
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true,limit:'50mb'}))
+app.use(bodyParser.urlencoded({extended:true,limit:'3mb'}))//Giới hạn kích thước request gửi lên server phải nhỏ hơn 3mb
 app.use(cors({ credentials: true, origin:"https://febaomatweb.vercel.app"}));//fix lỗi cross-domain
 //app.use(cors({ credentials: true, origin:true}));
 const limiter = rateLimit({
