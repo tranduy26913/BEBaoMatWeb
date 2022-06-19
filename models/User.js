@@ -44,7 +44,13 @@ const schema = new mongoose.Schema({
     tenhienthi:{
         type: String,
         require: true,
-        default: "Anonymous"
+        default: "Anonymous",
+        validate:{
+            validator:item=>{
+                return item.length<=20
+            },
+            message:"Tên hiển thị phải ngắn hơn 20 ký tự"
+        }
     },
     image:{
         type:String,
