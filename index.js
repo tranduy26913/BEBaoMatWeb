@@ -20,6 +20,7 @@ const limiter = rateLimit({
   windowMs: 10 * 60 * 1000, 
   max: 50 
 });
+app.use(limiter)
 const loginLimiter = rateLimit({
   windowMs: 5 * 60 * 1000, 
   max: 3
@@ -27,7 +28,7 @@ const loginLimiter = rateLimit({
 
 app.use("/auth/login", loginLimiter);
  
-app.use(limiter)
+
 //app.use(cors({ credentials: true, origin:"https://febaomatweb.vercel.app"}));//fix lỗi cross-domain
 app.use(cors({ credentials: true, origin:true}));
 app.use(cookieParser());
