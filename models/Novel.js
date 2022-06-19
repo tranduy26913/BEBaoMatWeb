@@ -16,6 +16,12 @@ const schema =new  mongoose.Schema({
     tacgia:{
         type: String,
         require: true,
+        validate:{
+            validator:item=>{
+                return item.length > 10
+            },
+            message:"Tên tác giả phải trên 4 ký tự"
+        }
     },
     theloai:{
         type: String,
