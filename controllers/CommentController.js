@@ -3,7 +3,7 @@ import { User } from '../models/User.js';
 import { ResponseDetail, ResponseData } from '../services/ResponseJSON.js';
 import { Novel } from '../models/Novel.js'
 import { Comment } from '../models/Comment.js';
-
+import mongoose from "mongoose";
 export const CommentController = {
     CreateComment: async (req, res) => {
         try {
@@ -69,12 +69,12 @@ export const CommentController = {
 
     DeleteComment: async (req, res) => {
         try {
-            const novelId = req.body.id
+            const novelId = new mongoose.Types.ObjectId(req.body.id)
             const username = req.user.sub
             const user = await User.findOne({username})
             const comment = await Comment.findById(novelId)
             if(comment){
-                if(comment.userId === user._id){
+                if(comment.userId.toString() === user._id.toString()){
                     const count=await Comment.findByIdAndDelete(novelId)
                     if(count) 
                         return res.status(200).json(ResponseData(200, {message:"Xoá thành công"}))

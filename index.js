@@ -14,8 +14,7 @@ const PORT = process.env.PORT ||5000;
 const URI=process.env.MONGODB_URL;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true,limit:'3mb'}))//Giới hạn kích thước request gửi lên server phải nhỏ hơn 3mb
-app.use(cors({ credentials: true, origin:"https://febaomatweb.vercel.app"}));//fix lỗi cross-domain
-//app.use(cors({ credentials: true, origin:true}));
+
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000, 
   max: 50 
@@ -30,8 +29,8 @@ const loginLimiter = rateLimit({
 app.use("/auth/login", loginLimiter);
  
 
-app.use(cors({ credentials: true, origin:"https://febaomatweb.vercel.app"}));//fix lỗi cross-domain
-//app.use(cors({ credentials: true, origin:true}));
+//app.use(cors({ credentials: true, origin:"https://febaomatweb.vercel.app"}));//fix lỗi cross-domain
+app.use(cors({ credentials: true, origin:true}));
 app.use(cookieParser());
 app.disable('x-powered-by');//fix lỗi leak info from x-powered-by
 app.use(helmet())
