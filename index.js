@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser'
 import {UserRoute,AuthRoute, NovelRoute, CommentRoute} from './routers/index.js'
-import helmet from "helmet";
+import * as helmet from "helmet";
 import rateLimit from 'express-rate-limit'
 dotenv.config()
 
@@ -33,7 +33,7 @@ app.use(cors({ credentials: true, origin:"https://febaomatweb.vercel.app"}));//f
 //app.use(cors({ credentials: true, origin:true}));
 app.use(cookieParser());
 app.disable('x-powered-by');//fix lỗi leak info from x-powered-by
-app.use(helmet())
+
 app.use(helmet.frameguard())//fix lỗi clickjacking
 app.use(helmet.noSniff());//fix lỗi X-Content-Type-Options Header Missing
 app.use(helmet.xssFilter());
@@ -49,10 +49,10 @@ app.use(helmet.contentSecurityPolicy({
    directives: {
        defaultSrc: ["'self'"],  // default value for all directives that are absent
        scriptSrc: ["'none'"],   // helps prevent XSS attacks
-       frameAncestors: ["'none'"],  // helps prevent Clickjacking attacks
+       frameAncestors: ["'self'"],  // helps prevent Clickjacking attacks
        styleSrc: ["'none'"],
        fontSrc:["'none'"],
-       formAction:["'none'"],
+       formAction:["'self'"],
        objectSrc:["'none'"]
     }
 }))
