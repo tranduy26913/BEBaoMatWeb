@@ -47,7 +47,7 @@ app.use(
 app.use(helmet.contentSecurityPolicy({
   useDefaults: false,
    directives: {
-       defaultSrc: ["'self'"],  // default value for all directives that are absent
+       defaultSrc: ["'none'"],  // default value for all directives that are absent
        scriptSrc: ["'none'"],   // helps prevent XSS attacks
        frameAncestors: ["'self'"],  // helps prevent Clickjacking attacks
        styleSrc: ["'none'"],
